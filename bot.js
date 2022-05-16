@@ -227,6 +227,12 @@ bot.on("ready", () => {
 
 	console.log("Done!");
 
+	console.log("Setting bot status...");
+
+	bot.user.setActivity("gararu～", { type: "PLAYING" });
+
+	console.log("Bot status set to " + bot.user.presence.activities);
+
 	console.log("Bot is ready.");
 
 });
