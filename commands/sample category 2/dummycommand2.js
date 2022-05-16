@@ -21,7 +21,11 @@ module.exports = {
      */
 	execute(message, args) {
 
-        if (args[0].toLowerCase() == "ping") message.reply(`Pong!\nCommand execution took ${Date.now() - message.createdTimestamp}\nAPI latency is ${Math.round(bot.ws.ping)}`);
+        if (args[0].toLowerCase() == "ping") {
+            message.reply("Gathering data...").then( async (msg) => {
+                msg.edit(`Pong!\nCommand execution took ${msg.createdTimestamp - message.createdTimestamp}ms\nAPI latency is ${Math.round(bot.ws.ping)}ms`);
+            });
+        }
 
 	}
 };
