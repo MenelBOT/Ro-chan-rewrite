@@ -12,79 +12,79 @@ const commandFolders = fs.readdirSync("./commands");
 // Intents were introduced by discord to make bot creator lives harder, so here's an entire object of them for future use.
 // They are in bitfield form but integers represent them just fine.
 const Intents = {
-    FLAGS: {
-        GUILDS: 1,
-        GUILD_MEMBERS: 2,
-        GUILD_BANS: 4,
-        GUILD_EMOJIS_AND_STICKERS: 8,
-        GUILD_INTEGRATIONS: 16,
-        GUILD_WEBHOOKS: 32,
-        GUILD_INVITES: 64,
-        GUILD_VOICE_STATES: 128,
-        GUILD_PRESENCES: 256,
-        GUILD_MESSAGES: 512,
-        GUILD_MESSAGE_REACTIONS: 1024,
-        GUILD_MESSAGE_TYPING: 2048,
-        DIRECT_MESSAGES: 4096,
-        DIRECT_MESSAGE_REACTIONS: 8192,
-        DIRECT_MESSAGE_TYPING: 16384,
-        GUILD_SCHEDULED_EVENTS: 65536
-    }
-}
+	FLAGS: {
+		GUILDS: 1,
+		GUILD_MEMBERS: 2,
+		GUILD_BANS: 4,
+		GUILD_EMOJIS_AND_STICKERS: 8,
+		GUILD_INTEGRATIONS: 16,
+		GUILD_WEBHOOKS: 32,
+		GUILD_INVITES: 64,
+		GUILD_VOICE_STATES: 128,
+		GUILD_PRESENCES: 256,
+		GUILD_MESSAGES: 512,
+		GUILD_MESSAGE_REACTIONS: 1024,
+		GUILD_MESSAGE_TYPING: 2048,
+		DIRECT_MESSAGES: 4096,
+		DIRECT_MESSAGE_REACTIONS: 8192,
+		DIRECT_MESSAGE_TYPING: 16384,
+		GUILD_SCHEDULED_EVENTS: 65536
+	}
+};
 
 // Permissions is an object containing all the possible bit values for each permission on discord. Due to the fact that
 // they definitely go over the 32 bit integer limit they are stored as BigInts here as indicated by the n suffix
 const Permissions = {
-    FLAGS: {
-        CREATE_INSTANT_INVITE: 1n,
-        KICK_MEMBERS: 2n,
-        BAN_MEMBERS: 4n,
-        ADMINISTRATOR: 8n,
-        MANAGE_CHANNELS: 16n,
-        MANAGE_GUILD: 32n,
-        ADD_REACTIONS: 64n,
-        VIEW_AUDIT_LOG: 128n,
-        PRIORITY_SPEAKER: 256n,
-        STREAM: 512n,
-        VIEW_CHANNEL: 1024n,
-        SEND_MESSAGES: 2048n,
-        SEND_TTS_MESSAGES: 4096n,
-        MANAGE_MESSAGES: 8192n,
-        EMBED_LINKS: 16384n,
-        ATTACH_FILES: 32768n,
-        READ_MESSAGE_HISTORY: 65536n,
-        MENTION_EVERYONE: 131072n,
-        USE_EXTERNAL_EMOJIS: 262144n,
-        VIEW_GUILD_INSIGHTS: 524288n,
-        CONNECT: 1048576n,
-        SPEAK: 2097152n,
-        MUTE_MEMBERS: 4194304n,
-        DEAFEN_MEMBERS: 8388608n,
-        MOVE_MEMBERS: 16777216n,
-        USE_VAD: 33554432n,
-        CHANGE_NICKNAME: 67108864n,
-      MANAGE_NICKNAMES: 134217728n,
-      MANAGE_ROLES: 268435456n,
-      MANAGE_WEBHOOKS: 536870912n,
-      MANAGE_EMOJIS_AND_STICKERS: 1073741824n,
-      USE_APPLICATION_COMMANDS: 2147483648n,
-      REQUEST_TO_SPEAK: 4294967296n,
-      MANAGE_EVENTS: 8589934592n,
-      MANAGE_THREADS: 17179869184n,
-      USE_PUBLIC_THREADS: 34359738368n,
-      CREATE_PUBLIC_THREADS: 34359738368n,
-      USE_PRIVATE_THREADS: 68719476736n,
-      CREATE_PRIVATE_THREADS: 68719476736n,
-      USE_EXTERNAL_STICKERS: 137438953472n,
-      SEND_MESSAGES_IN_THREADS: 274877906944n,
-      START_EMBEDDED_ACTIVITIES: 549755813888n,
-      MODERATE_MEMBERS: 1099511627776n
-    },
-    ALL: 2199023255551n,
-    DEFAULT: 104324673n,
-    STAGE_MODERATOR: 20971536n,
-    defaultBit: 0n
-}
+	FLAGS: {
+		CREATE_INSTANT_INVITE: 1n,
+		KICK_MEMBERS: 2n,
+		BAN_MEMBERS: 4n,
+		ADMINISTRATOR: 8n,
+		MANAGE_CHANNELS: 16n,
+		MANAGE_GUILD: 32n,
+		ADD_REACTIONS: 64n,
+		VIEW_AUDIT_LOG: 128n,
+		PRIORITY_SPEAKER: 256n,
+		STREAM: 512n,
+		VIEW_CHANNEL: 1024n,
+		SEND_MESSAGES: 2048n,
+		SEND_TTS_MESSAGES: 4096n,
+		MANAGE_MESSAGES: 8192n,
+		EMBED_LINKS: 16384n,
+		ATTACH_FILES: 32768n,
+		READ_MESSAGE_HISTORY: 65536n,
+		MENTION_EVERYONE: 131072n,
+		USE_EXTERNAL_EMOJIS: 262144n,
+		VIEW_GUILD_INSIGHTS: 524288n,
+		CONNECT: 1048576n,
+		SPEAK: 2097152n,
+		MUTE_MEMBERS: 4194304n,
+		DEAFEN_MEMBERS: 8388608n,
+		MOVE_MEMBERS: 16777216n,
+		USE_VAD: 33554432n,
+		CHANGE_NICKNAME: 67108864n,
+		MANAGE_NICKNAMES: 134217728n,
+		MANAGE_ROLES: 268435456n,
+		MANAGE_WEBHOOKS: 536870912n,
+		MANAGE_EMOJIS_AND_STICKERS: 1073741824n,
+		USE_APPLICATION_COMMANDS: 2147483648n,
+		REQUEST_TO_SPEAK: 4294967296n,
+		MANAGE_EVENTS: 8589934592n,
+		MANAGE_THREADS: 17179869184n,
+		USE_PUBLIC_THREADS: 34359738368n,
+		CREATE_PUBLIC_THREADS: 34359738368n,
+		USE_PRIVATE_THREADS: 68719476736n,
+		CREATE_PRIVATE_THREADS: 68719476736n,
+		USE_EXTERNAL_STICKERS: 137438953472n,
+		SEND_MESSAGES_IN_THREADS: 274877906944n,
+		START_EMBEDDED_ACTIVITIES: 549755813888n,
+		MODERATE_MEMBERS: 1099511627776n
+	},
+	ALL: 2199023255551n,
+	DEFAULT: 104324673n,
+	STAGE_MODERATOR: 20971536n,
+	defaultBit: 0n
+};
 
 // These are just some helpers discord provides to assist in properly formatting code snippets for discord messages
 const { inlineCode, codeBlock } = require("@discordjs/builders");
@@ -93,18 +93,18 @@ const { inlineCode, codeBlock } = require("@discordjs/builders");
 const { exit, stdout, stdin } = require("process");
 
 // Extending node.js console using the console-stamp dependency
-require('console-stamp')(console, { format: ':date(HH:MM:ss.l)' });
+require("console-stamp")(console, { format: ":date(HH:MM:ss.l)" });
 
 let bot = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"], intents: [ // This abomination here basically tells discord to behave like in v11 and send us every gateway event
-    Intents.FLAGS.GUILDS, 
-    Intents.FLAGS.GUILD_MEMBERS, 
-    Intents.FLAGS.GUILD_BANS, 
-    Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, 
-    Intents.FLAGS.GUILD_INVITES, 
-    Intents.FLAGS.GUILD_MESSAGES, 
-    Intents.FLAGS.GUILD_PRESENCES, 
-    Intents.FLAGS.GUILD_MESSAGE_REACTIONS, 
-    Intents.FLAGS.DIRECT_MESSAGES
+	Intents.FLAGS.GUILDS,
+	Intents.FLAGS.GUILD_MEMBERS,
+	Intents.FLAGS.GUILD_BANS,
+	Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
+	Intents.FLAGS.GUILD_INVITES,
+	Intents.FLAGS.GUILD_MESSAGES,
+	Intents.FLAGS.GUILD_PRESENCES,
+	Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+	Intents.FLAGS.DIRECT_MESSAGES
 ], allowedMentions: { "parse": ["users", "roles"], repliedUser: true } }); // This makes it so the bot cannot ping @everyone or @here. It can still ping users and roles
 // changing repliedUser to false will make the bot not ping the user when replying to them using discord's built in message.reply() function.
 // This only serves as a default and can be overridden by passing an allowedMentions object to the message.reply() or channel.send() functions.
@@ -112,11 +112,15 @@ let bot = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"], int
 
 // Defining helper functions
 
+// The following function is a no operation function so we will disable
+// eslint no-empty-function as we know it's empty and don't plan on adding
+// a return nothing operation as that would make it no longer noop.
 /**
 * Does nothing.
 *
 * Useful when an operation needs a callback function but you don't want it to do anything
 */
+// eslint-disable-next-line no-empty-function
 function noop() {
 
 }
@@ -128,53 +132,53 @@ function noop() {
  */
 function getRandomInt(min = 0, max = 10000) {
 
-if (typeof min != "number") min = 0;
+	if (typeof min != "number") min = 0;
 
-if (typeof max != "number") max = 10000;
+	if (typeof max != "number") max = 10000;
 
-min = Math.ceil(min);
-max = Math.floor(max);
-return Math.floor(Math.random() * (max - min)) + min;
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min)) + min;
 
 }
 
 /**
  * @param {String} text String to prepare for evaluation.
- * 
+ *
  * @summary
- * Returns string that is eval()-"safe". 
- * 
+ * Returns string that is eval()-"safe".
+ *
  * Since non string objects are always eval()-"safe" it returns them back if given as argument.
  */
 function clean(text) {
 
-if (typeof text === "string") return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+	if (typeof text === "string") return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
 
-else return text;
+	else return text;
 
 }
 
 /**
  * @param {Number} bitfield Bitfield to convert to String.
  * @summary
- * Returns string representation of a discord permission bitfield if one exists. 
- * 
+ * Returns string representation of a discord permission bitfield if one exists.
+ *
  * If there is no permission with given bitfield returns null.
  */
 function permBitToString(bitfield = 0) {
 
-    if (typeof bitfield != "number" || typeof bitfield != "bigint") bitfield = 0n;
+	if (typeof bitfield != "number" || typeof bitfield != "bigint") bitfield = 0n;
 
-    for (const key in Permissions.FLAGS)
-        if (Permissions.FLAGS[key] == bitfield) return key;
-    return null;
+	for (const key in Permissions.FLAGS)
+		if (Permissions.FLAGS[key] == bitfield) return key;
+	return null;
 
 }
 
 /**
  @returns String with formatting "DD/MM/YYYY at HH:MM:SS GMT+0SERVERGMT:00"
  */
- function CreateCurrentFooter() {
+function CreateCurrentFooter() {
 
 	const todaysdate = new Date();
 	const sec = String(todaysdate.getSeconds()).padStart(2, "0");
@@ -192,21 +196,21 @@ function permBitToString(bitfield = 0) {
 // Exporting helper functions in case file is ever imported
 
 module.exports = {
-    noop: noop,
-    getRandomInt: getRandomInt,
-    clean: clean,
-    permBitToString: permBitToString,
-    createCurrentFooter: CreateCurrentFooter,
-    bot: bot
-}
+	noop: noop,
+	getRandomInt: getRandomInt,
+	clean: clean,
+	permBitToString: permBitToString,
+	createCurrentFooter: CreateCurrentFooter,
+	bot: bot
+};
 
 bot.on("ready", () => {
 
-    console.log("Starting bot. . .");
+	console.log("Starting bot. . .");
 
-    console.log("Registering commands. . .");
+	console.log("Registering commands. . .");
 
-    bot.commands = new Discord.Collection();
+	bot.commands = new Discord.Collection();
 
 	for (const folder of commandFolders) {
 
@@ -221,43 +225,39 @@ bot.on("ready", () => {
 
 	}
 
-    console.log("Done!");
+	console.log("Done!");
 
-    console.log("Bot is ready.");
+	console.log("Bot is ready.");
 
 });
 
 bot.on("messageCreate", async message => {
 
-    // Create arguments array and command variable
+	// Create arguments array and command variable
 
-    const args = message.content.slice(prefix.length).trim().split(/\s+/);
-    const commandName = args.shift().toLowerCase();
-    if (message.author.id == bot.user.id) return;
+	const args = message.content.slice(prefix.length).trim().split(/\s+/);
+	const commandName = args.shift().toLowerCase();
+	if (message.author.id == bot.user.id) return;
 
-    const command = bot.commands.get(commandName) || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+	const command = bot.commands.get(commandName) || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-			if (command) {
+	if (command) {
 
-				// Some command was executed
+		// Some command was executed
 
-				try {
+		try {
 
-					if (message.content.startsWith(prefix)) {
+			if (message.content.startsWith(prefix)) command.execute(message, args);
 
-						command.execute(message, args);
+		} catch (error) {
 
-					}
+			console.error(error);
+			message.reply("An unknown error occured while executing the command...");
 
-				} catch (error) {
+		}
 
-					console.error(error);
-					message.reply("An unknown error occured while executing the command...");
+	}
 
-				}
-
-			}
-
-})
+});
 
 bot.login(token);

@@ -13,19 +13,19 @@ module.exports = {
 	name: "dummycommand2",
 	description: "A descriptive summary of the command",
 	usage: "What should be appended after the command name when sending the message\n<> - Required arguments, [] - Optional arguments",
-    aliases: ["dc2", "dummyc2"], // What other names to register this exact command under? Beware of conflicts!
-    /**
-     * 
-     * @param {Discord.Message} message The message that triggered this command
-     * @param {Array.<String>} args The command argument array
-     */
+	aliases: ["dc2", "dummyc2"], // What other names to register this exact command under? Beware of conflicts!
+	/**
+	 *
+	 * @param {Discord.Message} message The message that triggered this command
+	 * @param {Array.<String>} args The command argument array
+	 */
 	execute(message, args) {
 
-        if (args[0].toLowerCase() == "ping") {
-            message.reply("Gathering data...").then( async (msg) => {
-                msg.edit(`Pong!\nCommand execution took ${msg.createdTimestamp - message.createdTimestamp}ms\nAPI latency is ${Math.round(bot.ws.ping)}ms`);
-            });
-        }
+		if (args[0].toLowerCase() == "ping") {
+			message.reply("Gathering data...").then(async (msg) => {
+				msg.edit(`Pong!\nCommand execution took ${msg.createdTimestamp - message.createdTimestamp}ms\nAPI latency is ${Math.round(bot.ws.ping)}ms`);
+			});
+		}
 
 	}
 };
