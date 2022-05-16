@@ -1,0 +1,1 @@
+require('console-stamp')(console, { format: ':date(HH:MM:ss.l)' });

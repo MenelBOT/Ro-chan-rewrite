@@ -1,0 +1,16 @@
+{
+  "name": "ro-chan-rewrite",
+  "version": "2.0.0",
+  "description": "Discord bot for detecting duplicate image posts, but rewritten",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bot.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "console-stamp": "^3.0.5"
+  }
+}
