@@ -1,0 +1,20 @@
+version: '3'
+services:
+  node:
+    restart: unless-stopped
+    build: .
+    ports:
+    - 80:3000
+    volumes:
+      - ./app/:/code
+    depends_on:
+      - mongo
+  mongo:
+    restart: unless-stopped
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+volumes:
+  mongodb:
