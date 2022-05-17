@@ -1,5 +1,6 @@
 {
     "prefix": "!",
     "token": "",
-    "ownerId": ""
+    "ownerId": "",
+    "mongourl": "mongodb://mongo:27017"
 }

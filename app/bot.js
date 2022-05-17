@@ -1,6 +1,6 @@
 // Declaring constants for the bot.
 
-const { prefix, token, ownerId } = require("./config.dev.json"); // If you do not have this file yet, rename your config.json to config.dev.json
+const { prefix, token, ownerId, mongourl } = require("./config.dev.json"); // If you do not have this file yet, rename your config.json to config.dev.json
 // This is to make testing possible without actually uploading the test bot token to github.
 
 const Discord = require("discord.js");
@@ -95,9 +95,7 @@ const { exit, stdout, stdin } = require("process");
 // Extending node.js console using the console-stamp dependency
 require("console-stamp")(console, { format: ":date(HH:MM:ss.l)" });
 
-// Declaring database
-
-const mongourl = "mongodb://mongo:27017";
+// Import database utility
 
 const mongo = require("mongoose");
 
@@ -211,11 +209,39 @@ module.exports = {
 	bot: bot
 };
 
+// Make sure that any database connection is closed when the process is stopped
+
+process.on("SIGINT", function() {
+
+	mongo.connection.close(function() {
+
+		console.log("KEYBOARD INTERRUPT DETECTED");
+		console.log("Database access closed due to app termination");
+		process.exit(1);
+
+	});
+
+});
+
+process.on("SIGTERM", () => {
+
+	mongo.connection.close(() => {
+
+		console.log("PROCESS CLOSE SIGNAL DETECTED");
+		console.log("Database closed due to dyno restart");
+		process.exit(143);
+
+	});
+
+});
+
 bot.on("ready", async () => {
 
 	console.log("Starting bot. . .");
 
 	console.log("Attempting connection to database. . .");
+
+	// Since this is a persistent connection that only closes with the bot, we don't use the connectMongoose.js utility
 
 	mongo.connect(mongourl).then(() => {
 

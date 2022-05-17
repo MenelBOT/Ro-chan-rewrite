@@ -13,8 +13,7 @@
   "dependencies": {
     "console-stamp": "^3.0.5",
     "discord.js": "^13.6.0",
-    "mongoose": "^6.3.3",
-    "node-json-db": "^1.5.0"
+    "mongoose": "^6.3.3"
   },
   "devDependencies": {
     "eslint": "^8.9.0"
