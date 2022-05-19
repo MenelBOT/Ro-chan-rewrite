@@ -97,8 +97,10 @@ require("console-stamp")(console, { format: ":date(HH:MM:ss.l)" });
 
 // Import database utility
 
-const mongo = require("mongoose");
+const { MongoClient } = require("mongodb");
+const { resolve } = require("path");
 
+const mongo = new MongoClient(mongourl);
 
 const bot = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"], intents: [ // This abomination here basically tells discord to behave like in v11 and send us every gateway event
 	Intents.FLAGS.GUILDS,
@@ -213,7 +215,7 @@ module.exports = {
 
 process.on("SIGINT", function() {
 
-	mongo.connection.close(function() {
+	mongo.close(() => {
 
 		console.log("KEYBOARD INTERRUPT DETECTED");
 		console.log("Database access closed due to app termination");
@@ -225,10 +227,10 @@ process.on("SIGINT", function() {
 
 process.on("SIGTERM", () => {
 
-	mongo.connection.close(() => {
+	mongo.close(() => {
 
 		console.log("PROCESS CLOSE SIGNAL DETECTED");
-		console.log("Database closed due to dyno restart");
+		console.log("Database closed due to process termination");
 		process.exit(143);
 
 	});
@@ -243,9 +245,42 @@ bot.on("ready", async () => {
 
 	// Since this is a persistent connection that only closes with the bot, we don't use the connectMongoose.js utility
 
-	mongo.connect(mongourl).then(() => {
+	mongo.connect().then(async () => {
 
 		console.log("Connected to MongoDB!");
+
+		console.log("Probing database for errors. . .");
+
+		function validateDB(dbName) {
+
+			const collections = mongo.db("bot").listCollections({ name: dbName });
+			collections.next(function(error, collection) {
+
+				if (!collection) {
+
+					console.log(`${dbName} database was not found!`);
+					console.log(`Creating a new ${dbName} database to avoid crashing, data will be overwritten!`);
+
+					mongo.db("bot").createCollection(dbName, { capped: false });
+
+				} else console.log(`${dbName} database successfully validated!`);
+
+			});
+
+		}
+
+
+		await new Promise(function(resolve, reject) {
+
+			validateDB("images");
+			validateDB("users");
+			validateDB("channels");
+			validateDB("servers");
+
+			resolve();
+
+		});
+
 
 		console.log("Registering commands. . .");
 
